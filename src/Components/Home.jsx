@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react'
 const Home = () => {
   const [adminTotal, setAdminTotal] = useState(0)
   const [employeeTotal, setemployeeTotal] = useState(0)
-  const [salaryTotal, setSalaryTotal] = useState(0)
+  const [teacherTotal, setteacherTotal] = useState(0)
   const [admins, setAdmins] = useState([])
 
   useEffect(() => {
     adminCount();
     employeeCount();
-    salaryCount();
     AdminRecords();
+    teacherCount();
   }, [])
 
   const AdminRecords = () => {
@@ -40,13 +40,11 @@ const Home = () => {
       }
     })
   }
-  const salaryCount = () => {
-    axios.get('http://localhost:3000/auth/salary_count')
+  const teacherCount = () => {
+    axios.get('http://localhost:3000/auth/teacher_count')
     .then(result => {
       if(result.data.Status) {
-        setSalaryTotal(result.data.Result[0].salaryOFEmp)
-      } else {
-        alert(result.data.Error)
+        setteacherTotal(result.data.Result[0].teacher)
       }
     })
   }
@@ -75,12 +73,12 @@ const Home = () => {
         </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
-            <h4>Salary</h4>
+            <h4>Teacher</h4>
           </div>
           <hr />
           <div className='d-flex justify-content-between'>
             <h5>Total:</h5>
-            <h5>${salaryTotal}</h5>
+            <h5>{teacherTotal}</h5>
           </div>
         </div>
       </div>

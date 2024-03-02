@@ -4,14 +4,14 @@ import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const anvigate = useNavigate()
+  const navigate = useNavigate()
   axios.defaults.withCredentials = true
   const handleLogout = () => {
     axios.get('http://localhost:3000/auth/logout')
     .then(result => {
       if(result.data.Status) { 
         localStorage.removeItem("valid")
-        anvigate('/')
+        navigate('/')
       }
     })
   }
@@ -25,7 +25,7 @@ const Dashboard = () => {
               className="d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none"
             >
               <span className="fs-5 fw-bolder d-none d-sm-inline">
-                SCC Employee Management System
+                SCC Attendance Management System
               </span>
             </Link>
             <ul
@@ -54,11 +54,22 @@ const Dashboard = () => {
               </li>
               <li className="w-100">
                 <Link
+                  to="/dashboard/teacher"
+                  className="nav-link px-0 align-middle text-white"
+                >
+                  <i className="fs-4 bi-people ms-2"></i>
+                  <span className="ms-2 d-none d-sm-inline">
+                    Manage Teachers
+                  </span>
+                </Link>
+              </li>
+              <li className="w-100">
+                <Link
                   to="/dashboard/category"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi-columns ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">Category</span>
+                  <span className="ms-2 d-none d-sm-inline">Department</span>
                 </Link>
               </li>
               <li className="w-100">
@@ -83,7 +94,7 @@ const Dashboard = () => {
         </div>
         <div className="col p-0 m-0">
             <div className="p-2 d-flex justify-content-center shadow">
-                <h4>Employee Management System</h4>
+                <h4>Attendance Management System</h4>
             </div>
             <Outlet />
         </div>
